@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>مسابقة رمضان - قروب O2 FOOTBALL</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #04241a;
+      --emerald: #0a4d3c;
+      --gold: #c4a45c;
+      --gold-hover: #e5d2a7;
+      --bg-cream: #fdfaf5;
+      --text-main: #1a1a1a;
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    * { box-sizing: border-box; transition: all 0.3s ease; }
+    
+    body {
+      margin: 0;
+      font-family: 'Alexandria', sans-serif;
+      background: radial-gradient(circle at top, var(--emerald) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 450px;
+      gap: 30px;
+    }
+
+    header {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--glass);
+      border: 1px solid rgba(196, 164, 92, 0.2);
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
+      margin-bottom: 20px;
+    }
+
+    header h1 { font-weight: 800; font-size: 24px; color: var(--gold); margin: 0; }
+
+    .panel { background: rgba(255, 255, 255, 0.02); border-radius: 24px; padding: 30px; border: 1px solid rgba(255, 255, 255, 0.05); }
+
+    .section-title { 
+      color: var(--gold); 
+      font-size: 15px; 
+      font-weight: 700; 
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(196, 164, 92, 0.2);
+    }
+
+    /* أزرار بروفيشنال بدون ألوان خلفية وبإطار ذهبي */
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: inherit;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+    }
+
+    .btn:hover { background: rgba(196, 164, 92, 0.1); color: var(--gold-hover); border-color: var(--gold-hover); }
+
+    /* تمييز زر الذهب الممتلئ للعمليات الرئيسية فقط */
+    .btn-primary { background: var(--gold); color: var(--primary-dark); }
+    .btn-primary:hover { background: var(--gold-hover); color: var(--primary-dark); }
+
+    .item-row {
+      background: rgba(255, 255, 255, 0.98); 
+      color: var(--text-main); 
+      padding: 15px 20px; 
+      border-radius: 15px; 
+      margin-bottom: 12px;
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+    }
+
+    /* البطاقة النهائية */
+    .card {
+      background: var(--bg-cream); color: var(--text-main); border-radius: 35px; padding: 45px;
+      position: relative; border: 10px solid var(--gold); text-align: center;
+    }
+    .card h2 { color: var(--emerald); font-weight: 900; font-size: 30px; margin-bottom: 10px; }
+    .round-label { display: inline-block; background: var(--primary-dark); color: var(--gold); padding: 5px 20px; border-radius: 50px; font-size: 12px; font-weight: 700; margin-bottom: 25px; }
+
+    .unified-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .res-box { padding: 20px; border-radius: 20px; border: 1px solid #eee; background: #fff; }
+
+    /* Modals */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); display: none; align-items: center; justify-content: center; z-index: 10000; }
+    .modal-content { background: white; color: var(--text-main); width: 400px; border-radius: 24px; padding: 30px; }
+    .modal-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; font-family: inherit; }
+
+    @media (max-width: 1000px) { .container { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+        <h1>مسابقة  </h1>
+      <h1> رمضان   بقروب </h1>
+        <h1> O2 FOOTBALL</h1>
+      <p>نظام الأسئلة المتقدم وإدارة النتائج</p>
+    </header>
+
+    <main class="panel">
+      <div class="section-title">إعدادات الجولة</div>
+      <div class="item-row" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.1);">
+        <span id="roundTitleText" style="font-weight: 700;">الجولة الأولى</span>
+        <button class="btn btn-small" onclick="showEditRoundModal()">تعديل المسمى</button>
+      </div>
+
+      <div class="section-title" style="margin-top: 40px; display: flex; justify-content: space-between; align-items: center;">
+        <span>الأسئلة المتقدمة</span>
+        <button class="btn btn-primary" onclick="showAddQuestionModal()">إضافة سؤال</button>
+      </div>
+      <div id="qaList"></div>
+
+      <div class="section-title" style="margin-top: 40px;">لوحة المشاركين</div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+        <button class="btn" onclick="showAddNameModal('winner')">إضافة فائز</button>
+        <button class="btn" onclick="showAddNameModal('loser')">إضافة مغادر</button>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:15px;">
+        <div id="winnersList"></div>
+        <div id="losersList"></div>
+      </div>
+
+      <div style="margin-top:40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top:30px;">
+        <button class="btn btn-primary" style="width:100%; padding: 15px; font-size: 15px;" onclick="renderUnifiedCard()">توليد بطاقة النتائج النهائية</button>
+      </div>
+    </main>
+
+    <aside>
+      <div class="section-title">المعاينة المباشرة</div>
+      <div id="cardsContainer" style="display:flex; flex-direction:column; gap:25px;"></div>
+    </aside>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay">
+    <div class="modal-content">
+      <h3 id="modalTitle" style="margin-top:0; color:var(--emerald);"></h3>
+      <div id="modalBody"></div>
+      <div id="modalActions" style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    // 10 أسئلة دينية فوق المتوسطة
+    const advancedQuestions = [
+      {q: "من هو الصحابي الذي استضاف النبي ﷺ في بيته عند وصوله للمدينة؟", a: "أبو أيوب الأنصاري رضي الله عنه"},
+      {q: "ما هي السورة التي بدأت وانتهت بالتسبيح؟", a: "سورة الحشر"},
+      {q: "من هو الصحابي الذي أرسله النبي ﷺ قاضياً ومعلماً إلى اليمن؟", a: "معاذ بن جبل رضي الله عنه"},
+      {q: "في أي سنة هجرية تم تحويل القبلة من بيت المقدس إلى الكعبة؟", a: "السنة الثانية للهجرة"},
+      {q: "من هي الصحابية التي كانت تسمى 'حارسة المصحف'؟", a: "حفصة بنت عمر رضي الله عنها"},
+      {q: "ما هو الاسم الذي أطلق على صلح الحديبية في القرآن الكريم؟", a: "الفتح المبين"},
+      {q: "من هو آخر من توفي من العشرة المبشرين بالجنة؟", a: "سعد بن أبي وقاص رضي الله عنه"},
+      {q: "سورة في القرآن تسمى 'المنجية' من عذاب القبر، ما هي؟", a: "سورة الملك"},
+      {q: "من هو النبي الذي ذكر في القرآن الكريم بأنه 'أوّاه منيب'؟", a: "إبراهيم عليه السلام"},
+      {q: "في أي غزوة استشهد عدد كبير من حفاظ القرآن الكريم (70 حافظاً)؟", a: "غزوة اليمامة (حروب الردة)"}
+    ];
+
+    let state = JSON.parse(localStorage.getItem('o2_v6_advanced')) || {
+      roundName: "الجولة الأولى",
+      questions: advancedQuestions,
+      winners: [],
+      losers: []
+    };
+
+    const save = () => {
+      localStorage.setItem('o2_v6_advanced', JSON.stringify(state));
+      document.getElementById('roundTitleText').textContent = state.roundName;
+    };
+
+    const modal = {
+      show: (title, body, actions) => {
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalBody').innerHTML = body;
+        const acts = document.getElementById('modalActions');
+        acts.innerHTML = '';
+        actions.forEach(a => {
+          const b = document.createElement('button');
+          b.className = `btn ${a.class}`;
+          b.textContent = a.text;
+          b.onclick = () => { a.fn(); modal.hide(); };
+          acts.appendChild(b);
+        });
+        document.getElementById('modalOverlay').style.display = 'flex';
+      },
+      hide: () => document.getElementById('modalOverlay').style.display = 'none'
+    };
+
+    function refreshQA() {
+      const cont = document.getElementById('qaList');
+      cont.innerHTML = '';
+      state.questions.forEach((q, i) => {
+        const div = document.createElement('div');
+        div.className = 'item-row';
+        div.innerHTML = `
+          <span style="font-weight:600; font-size:13px;">${i+1}. ${q.q.substring(0,30)}...</span>
+          <div style="display:flex; gap:8px;">
+            <button class="btn" style="padding:4px 10px; font-size:11px;" onclick="showEditQuestionModal(${i})">تعديل</button>
+            <button class="btn" style="padding:4px 10px; font-size:11px;" onclick="deleteQuestion(${i})">حذف</button>
+          </div>
+        `;
+        cont.appendChild(div);
+      });
+    }
+
+    function showAddQuestionModal() {
+      modal.show('إضافة سؤال', `<input id="qIn" class="modal-input" placeholder="السؤال"><input id="aIn" class="modal-input" placeholder="الإجابة">`, [
+        { text: 'حفظ', class: 'btn-primary', fn: () => {
+          const q = document.getElementById('qIn').value;
+          const a = document.getElementById('aIn').value;
+          if(q) { state.questions.push({q,a}); save(); refreshQA(); }
+        }},
+        { text: 'إلغاء', class: '', fn: ()=>{} }
+      ]);
+    }
+
+    function showEditQuestionModal(i) {
+      const q = state.questions[i];
+      modal.show('تعديل السؤال', `<input id="qEd" class="modal-input" value="${q.q}"><input id="aEd" class="modal-input" value="${q.a}">`, [
+        { text: 'تحديث', class: 'btn-primary', fn: () => {
+          state.questions[i] = { q: document.getElementById('qEd').value, a: document.getElementById('aEd').value };
+          save(); refreshQA();
+        }}
+      ]);
+    }
+
+    function deleteQuestion(i) { state.questions.splice(i,1); save(); refreshQA(); }
+
+    function refreshNames() {
+      const wCont = document.getElementById('winnersList');
+      const lCont = document.getElementById('losersList');
+      wCont.innerHTML = ''; lCont.innerHTML = '';
+      state.winners.forEach((n, i) => wCont.innerHTML += `<div class="item-row" style="padding:8px 12px;"><span style="font-size:12px;">🏆 ${n}</span><button class="btn" style="border:none; padding:0;" onclick="delName('winner',${i})">×</button></div>`);
+      state.losers.forEach((n, i) => lCont.innerHTML += `<div class="item-row" style="padding:8px 12px;"><span style="font-size:12px;">🕯️ ${n}</span><button class="btn" style="border:none; padding:0;" onclick="delName('loser',${i})">×</button></div>`);
+    }
+
+    function delName(type, i) { if(type==='winner') state.winners.splice(i,1); else state.losers.splice(i,1); save(); refreshNames(); }
+
+    function showAddNameModal(type) {
+      modal.show('إضافة مشارك', `<input id="nIn" class="modal-input" placeholder="الاسم الكامل">`, [
+        { text: 'إضافة', class: 'btn-primary', fn: () => {
+          const n = document.getElementById('nIn').value;
+          if(n) { if(type==='winner') state.winners.push(n); else state.losers.push(n); save(); refreshNames(); }
+        }}
+      ]);
+    }
+
+    function showEditRoundModal() {
+      modal.show('تعديل اسم الجولة', `<input id="rIn" class="modal-input" value="${state.roundName}">`, [
+        { text: 'تحديث', class: 'btn-primary', fn: () => { state.roundName = document.getElementById('rIn').value; save(); }}
+      ]);
+    }
+
+    function renderUnifiedCard() {
+      const container = document.getElementById('cardsContainer');
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `
+        <div style="font-size:10px; color:var(--gold); font-weight:700; margin-bottom:5px;">قروب O2 FOOTBALL</div>
+        <h2>نتائج المسابقة</h2>
+        <div class="round-label">${state.roundName}</div>
+        <div class="unified-grid">
+          <div class="res-box" style="background:#f4faf7;">
+            <h3 style="color:var(--emerald); font-size:14px; margin-bottom:15px;">🏆 المتأهلون</h3>
+            ${state.winners.map(n => `<div style="font-weight:700; font-size:13px; margin-bottom:5px;">⭐ ${n}</div>`).join('') || '---'}
+          </div>
+          <div class="res-box" style="background:#fffcfc;">
+            <h3 style="color:#b91c1c; font-size:14px; margin-bottom:15px;">🕯️ المغادرون</h3>
+            ${state.losers.map(n => `<div style="font-weight:700; font-size:13px; margin-bottom:2px;">${n}</div><div style="font-size:9px; color:#b91c1c; margin-bottom:8px;">(حظ أوفر)</div>`).join('') || '---'}
+          </div>
+        </div>
+        <button class="btn btn-primary" style="margin-top:30px; width:100%" onclick="downloadCard(this.parentElement)">📥 حفظ الصورة النهائية</button>
+      `;
+      container.prepend(div);
+      div.scrollIntoView({behavior:'smooth'});
+    }
+
+    function downloadCard(el) {
+      const btn = el.querySelector('button'); btn.style.display = 'none';
+      html2canvas(el, { scale: 3 }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `O2-FOOTBALL-${Date.now()}.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+        btn.style.display = 'block';
+      });
+    }
+
+    save();
+    refreshQA();
+    refreshNames();
+  </script>
+</body>
+</html>
