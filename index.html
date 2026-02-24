@@ -224,7 +224,7 @@
       {q: "في أي غزوة استشهد عدد كبير من حفاظ القرآن الكريم (70 حافظاً)؟", a: "غزوة اليمامة"}
     ];
 
-    let state = JSON.parse(localStorage.getItem('o2_v9_stable')) || {
+    let state = JSON.parse(localStorage.getItem('o2_v10_messages')) || {
       roundName: "الجولة الأولى",
       questions: advancedQuestions,
       winners: [],
@@ -232,7 +232,7 @@
     };
 
     const save = () => {
-      localStorage.setItem('o2_v9_stable', JSON.stringify(state));
+      localStorage.setItem('o2_v10_messages', JSON.stringify(state));
       document.getElementById('roundTitleText').textContent = state.roundName;
     };
 
@@ -300,12 +300,14 @@
         <div class="round-label">${state.roundName}</div>
         <div class="unified-grid">
           <div class="res-box" style="background:#f4faf7;">
-            <h3 style="color:var(--emerald); font-size:14px; margin-bottom:15px;">🏆 المتأهلون</h3>
-            ${state.winners.map(n => `<div style="font-weight:700; font-size:13px; margin-bottom:5px;">⭐ ${n}</div>`).join('') || '---'}
+            <h3 style="color:var(--emerald); font-size:14px; margin-bottom:5px;">🏆 المتأهلون</h3>
+            <div style="font-size:10px; color:#555; margin-bottom:15px; font-weight:600;">ألف مبروك التأهل! بانتظاركم في التحديات القادمة 🌟</div>
+            ${state.winners.map(n => `<div style="font-weight:700; font-size:13px; margin-bottom:5px;">⭐ ${n}</div>`).join('') || '<div style="font-size:12px; color:#999;">لا يوجد أسماء بعد</div>'}
           </div>
           <div class="res-box" style="background:#fffcfc;">
-            <h3 style="color:#b91c1c; font-size:14px; margin-bottom:15px;">🕯️ المغادرون</h3>
-            ${state.losers.map(n => `<div style="font-weight:700; font-size:13px; margin-bottom:2px;">${n}</div><div style="font-size:9px; color:#b91c1c; margin-bottom:8px;">(حظ أوفر)</div>`).join('') || '---'}
+            <h3 style="color:#b91c1c; font-size:14px; margin-bottom:5px;">🕯️ المغادرون</h3>
+            <div style="font-size:10px; color:#555; margin-bottom:15px; font-weight:600;">شكراً لمشاركتكم وتفاعلكم، حظ أوفر في المرات القادمة 🌹</div>
+            ${state.losers.map(n => `<div style="font-weight:700; font-size:13px; margin-bottom:5px;">${n}</div>`).join('') || '<div style="font-size:12px; color:#999;">لا يوجد أسماء بعد</div>'}
           </div>
         </div>
         <button class="btn btn-primary" style="margin-top:30px; width:100%" onclick="downloadCard(this.parentElement)">📥 حفظ بطاقة النتائج</button>
