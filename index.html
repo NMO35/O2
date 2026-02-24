@@ -477,12 +477,12 @@
           <div class="res-box" style="border-top: 4px solid var(--emerald);">
             <h3 style="color:var(--emerald); font-size:16px;">🏆 المتأهلون</h3>
             ${state.winners.map(n => `<div style="font-weight:800; font-size:14px; color:var(--primary-dark);">⭐ ${n}</div>`).join('') || '---'}
-            <div class="msg-tag" style="color:var(--emerald);">ألف مبروك التأهل! بانتظاركم في التحديات القادمة 🌟</div>
+            <div class="msg-tag" style="color:var(--emerald); margin-top:10px;">ألف مبروك التأهل! بانتظاركم في التحديات القادمة 🌟</div>
           </div>
           <div class="res-box" style="border-top: 4px solid #b91c1c;">
             <h3 style="color:#b91c1c; font-size:16px;">🕯️ المغادرون</h3>
             ${state.losers.map(n => `<div style="font-weight:700; font-size:13px; color:#b91c1c;">${n}</div>`).join('') || '---'}
-            <div class="msg-tag" style="color:#b91c1c;">شكراً لمشاركتكم وتفاعلكم، حظ أوفر في المرات القادمة 🌹</div>
+            <div class="msg-tag" style="color:#b91c1c; margin-top:10px;">شكراً لمشاركتكم وتفاعلكم، حظ أوفر في المرات القادمة 🌹</div>
           </div>
         </div>
         <button class="btn btn-primary" style="margin-top:30px; width:100%" onclick="downloadCard(this.parentElement)">📥 حفظ بطاقة النتائج</button>
@@ -493,14 +493,30 @@
 
     function downloadCard(el) {
       const btn = el.querySelector('.btn-primary'); 
-      btn.style.visibility = 'hidden';
-      html2canvas(el, { scale: 3, backgroundColor: null }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = `O2-Card-${Date.now()}.png`;
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-        btn.style.visibility = 'visible';
-      });
+      // استخدام الشفافية بدلاً من الإخفاء الكامل للحفاظ على أبعاد البطاقة
+      btn.style.opacity = '0'; 
+
+      // مهلة زمنية للتأكد من اكتمال الرندر (رسم العبارات والخطوط)
+      setTimeout(() => {
+        html2canvas(el, { 
+          scale: 3, 
+          useCORS: true, // ضروري لجلب الخطوط
+          allowTaint: false,
+          backgroundColor: "#fdfaf5", // تثبيت لون الخلفية
+          logging: false
+        }).then(canvas => {
+          const link = document.createElement('a');
+          link.download = `O2-Card-${Date.now()}.png`;
+          link.href = canvas.toDataURL("image/png");
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          btn.style.opacity = '1';
+        }).catch(err => {
+          console.error("خطأ في التقاط الصورة:", err);
+          btn.style.opacity = '1';
+        });
+      }, 500); // 500ms كافية جداً لضمان استقرار الـ DOM
     }
 
     function clearPreview() { document.getElementById('cardsContainer').innerHTML = ''; }
