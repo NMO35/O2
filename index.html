@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>مسابقة رمضان — قروب O2 FOOTBALL</title>
+  <title>نظام إدارة المسابقات الاحترافي - الإصدار الذهبي V1</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
@@ -51,7 +51,6 @@
       margin-bottom: 20px;
     }
 
-    /* العنوان المتموج */
     .main-title {
       font-weight: 900;
       line-height: 1.2;
@@ -62,9 +61,7 @@
       animation: shine 3s linear infinite;
     }
 
-    @keyframes shine {
-      to { background-position: 200% center; }
-    }
+    @keyframes shine { to { background-position: 200% center; } }
 
     .title-large { font-size: 42px; display: block; margin-bottom: 5px; }
     .title-sub { font-size: 22px; display: block; color: #fff; -webkit-text-fill-color: #fff; font-weight: 400; opacity: 0.9; }
@@ -99,6 +96,9 @@
 
     .btn:hover { background: rgba(196, 164, 92, 0.1); color: var(--gold-hover); border-color: var(--gold-hover); }
     .btn-primary { background: var(--gold); color: var(--primary-dark); }
+    .btn-primary:hover { background: var(--gold-hover); color: var(--primary-dark); }
+    .btn-danger { border-color: #ff4d4d; color: #ff4d4d; }
+    .btn-danger:hover { background: rgba(255,77,77,0.1); }
 
     .item-row {
       background: rgba(255, 255, 255, 0.98); 
@@ -112,18 +112,41 @@
     }
 
     .card {
-      background: var(--bg-cream); color: var(--text-main); border-radius: 35px; padding: 45px;
-      position: relative; border: 10px solid var(--gold); text-align: center;
+      background-color: var(--bg-cream);
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4a45c' fill-opacity='0.08'%3E%3Cpath d='M30 30L15 15H0v15l15 15-15 15v15h15L30 45l15 15h15V45L45 30l15-15V0H45L30 15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      color: var(--text-main); 
+      border-radius: 35px; 
+      padding: 45px;
+      position: relative; 
+      border: 10px solid var(--gold); 
+      text-align: center;
       margin-bottom: 20px;
     }
-    .card h2 { color: var(--emerald); font-weight: 900; font-size: 28px; margin-bottom: 10px; }
-    .card .content { font-size: 18px; margin: 25px 0; font-weight: 500; line-height: 1.6; }
+
+    .ribbon {
+      position: absolute;
+      top: -10px;
+      right: 40px;
+      background: var(--primary-dark);
+      color: var(--gold);
+      padding: 10px 25px 15px;
+      font-weight: 900;
+      font-size: 16px;
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      border: 2px solid var(--gold);
+      border-top: none;
+    }
+
+    .card h2 { color: var(--emerald); font-weight: 900; font-size: 28px; margin-bottom: 10px; margin-top: 15px; }
+    .card .content { font-size: 20px; margin: 30px 0; font-weight: 700; line-height: 1.6; }
     .round-label { display: inline-block; background: var(--primary-dark); color: var(--gold); padding: 5px 20px; border-radius: 50px; font-size: 12px; font-weight: 700; margin-bottom: 20px; }
 
-    .ans-box { background: #efe4cf; padding: 20px; border-radius: 15px; color: var(--emerald); font-weight: 800; margin-top: 15px; border: 1px dashed var(--gold); }
+    .ans-box { background: rgba(196, 164, 92, 0.15); padding: 20px; border-radius: 15px; color: var(--emerald); font-weight: 800; margin-top: 15px; border: 1px dashed var(--gold); font-size: 18px; }
 
     .unified-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .res-box { padding: 20px; border-radius: 20px; border: 1px solid #eee; background: #fff; }
+    .res-box { padding: 20px; border-radius: 20px; border: 1px solid #eee; background: rgba(255,255,255,0.9); backdrop-filter: blur(5px); display: flex; flex-direction: column; }
+    .msg-tag { font-size: 10px; font-weight: 700; margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); }
 
     footer {
       text-align: center;
@@ -133,11 +156,11 @@
       font-size: 13px;
       color: rgba(255, 255, 255, 0.5);
     }
-    .footer-credit { color: var(--gold); font-weight: 700; text-decoration: none; }
 
     .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); display: none; align-items: center; justify-content: center; z-index: 10000; }
-    .modal-content { background: white; color: var(--text-main); width: 400px; border-radius: 24px; padding: 30px; }
-    .modal-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; font-family: inherit; }
+    .modal-content { background: white; color: var(--text-main); width: 500px; border-radius: 24px; padding: 30px; max-height: 90vh; overflow-y: auto; }
+    .modal-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; font-family: inherit; font-size: 14px; }
+    textarea.modal-input { min-height: 120px; resize: vertical; }
 
     @media (max-width: 1000px) { .container { grid-template-columns: 1fr; } .title-large { font-size: 32px; } }
   </style>
@@ -148,21 +171,24 @@
     <header>
       <div class="main-title">
         <span class="title-large">مسابقة</span>
-        <span class="title-sub">رمضان قروب</span>
-        <span class="title-brand">O2 FOOTBALL</span>
+        <span class="title-sub" id="displaySubTitle">رمضان قروب</span>
+        <span class="title-brand" id="displayBrandTitle">O2 FOOTBALL</span>
       </div>
     </header>
 
     <main class="panel">
-      <div class="section-title">إعدادات الجولة</div>
-      <div class="item-row" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.1);">
+      <div class="section-title" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>الإعدادات والنسخ الاحتياطي</span>
+        <button class="btn btn-small" onclick="showSettingsModal()">⚙️ الإعدادات المتقدمة</button>
+      </div>
+      <div class="item-row" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px;">
         <span id="roundTitleText" style="font-weight: 700;">الجولة الأولى</span>
-        <button class="btn btn-small" onclick="showEditRoundModal()">تعديل المسمى</button>
+        <button class="btn btn-small" onclick="showEditRoundModal()">تعديل اسم الجولة</button>
       </div>
 
-      <div class="section-title" style="margin-top: 40px; display: flex; justify-content: space-between; align-items: center;">
-        <span>الأسئلة المتقدمة (10 أسئلة)</span>
-        <button class="btn btn-primary" onclick="showAddQuestionModal()">إضافة سؤال</button>
+      <div class="section-title" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>إدارة الأسئلة</span>
+        <button class="btn btn-primary" onclick="showAddQuestionModal()">+ إضافة أسئلة</button>
       </div>
       <div id="qaList"></div>
 
@@ -171,10 +197,12 @@
         <button class="btn" onclick="renderQuestionsPreview(true)">بطاقات الأسئلة + الإجابة</button>
       </div>
 
-      <div class="section-title" style="margin-top: 40px;">لوحة المشاركين</div>
+      <div class="section-title" style="margin-top: 40px; display: flex; justify-content: space-between; align-items: center;">
+        <span>لوحة المشاركين</span>
+      </div>
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-        <button class="btn" onclick="showAddNameModal('winner')">إضافة فائز</button>
-        <button class="btn" onclick="showAddNameModal('loser')">إضافة مغادر</button>
+        <button class="btn" onclick="showAddNameModal('winner')">🏆 إضافة فائزين</button>
+        <button class="btn" onclick="showAddNameModal('loser')">🕯️ إضافة مغادرين</button>
       </div>
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:15px;">
         <div id="winnersList"></div>
@@ -182,22 +210,21 @@
       </div>
 
       <div style="margin-top:40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top:30px;">
-        <button class="btn btn-primary" style="width:100%; padding: 15px; font-size: 15px;" onclick="renderUnifiedCard()">توليد بطاقة النتائج النهائية</button>
+        <button class="btn btn-primary" style="width:100%; padding: 15px; font-size: 16px; font-weight: 800;" onclick="renderUnifiedCard()">✨ توليد بطاقة النتائج النهائية ✨</button>
       </div>
     </main>
 
     <aside>
       <div class="section-title" style="display:flex; justify-content:space-between;">
         <span>المعاينة المباشرة</span>
-        <button class="btn btn-small" style="border:none" onclick="clearPreview()">مسح</button>
+        <button class="btn btn-small" style="border:none" onclick="clearPreview()">مسح العرض</button>
       </div>
       <div id="cardsContainer" style="display:flex; flex-direction:column; gap:25px;"></div>
     </aside>
   </div>
 
   <footer>
-    جميع الحقوق محفوظة &copy; 2024 | تم التطوير بواسطة 
-    <span class="footer-credit">NMO</span>
+    جميع الحقوق محفوظة &copy; 2026 | تم التطوير بواسطة NMO
   </footer>
 
   <div id="modalOverlay" class="modal-overlay">
@@ -209,9 +236,10 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
   <script>
-    // القائمة الكاملة - 10 أسئلة
-    const advancedQuestions = [
+    const defaultQuestions = [
       {q: "من هو الصحابي الذي استضاف النبي ﷺ في بيته عند وصوله للمدينة؟", a: "أبو أيوب الأنصاري رضي الله عنه"},
       {q: "ما هي السورة التي بدأت وانتهت بالتسبيح؟", a: "سورة الحشر"},
       {q: "من هو الصحابي الذي أرسله النبي ﷺ قاضياً ومعلماً إلى اليمن؟", a: "معاذ بن جبل رضي الله عنه"},
@@ -224,16 +252,29 @@
       {q: "في أي غزوة استشهد عدد كبير من حفاظ القرآن الكريم (70 حافظاً)؟", a: "غزوة اليمامة"}
     ];
 
-    let state = JSON.parse(localStorage.getItem('o2_v10_messages')) || {
+    let state = JSON.parse(localStorage.getItem('o2_v12_pro')) || {
       roundName: "الجولة الأولى",
-      questions: advancedQuestions,
+      brandTitle: "O2 FOOTBALL",
+      subTitle: "رمضان قروب",
+      questions: defaultQuestions,
       winners: [],
       losers: []
     };
 
     const save = () => {
-      localStorage.setItem('o2_v10_messages', JSON.stringify(state));
+      localStorage.setItem('o2_v12_pro', JSON.stringify(state));
+      updateTitles();
+    };
+
+    const updateTitles = () => {
+      document.getElementById('displaySubTitle').textContent = state.subTitle;
+      document.getElementById('displayBrandTitle').textContent = state.brandTitle;
       document.getElementById('roundTitleText').textContent = state.roundName;
+    }
+
+    const validate = (val, msg) => {
+      if (!val || val.trim() === "") { alert(msg); return false; }
+      return true;
     };
 
     const modal = {
@@ -246,7 +287,7 @@
           const b = document.createElement('button');
           b.className = `btn ${a.class}`;
           b.textContent = a.text;
-          b.onclick = () => { a.fn(); modal.hide(); };
+          b.onclick = () => { a.fn(); };
           acts.appendChild(b);
         });
         document.getElementById('modalOverlay').style.display = 'flex';
@@ -264,11 +305,144 @@
           <span style="font-weight:600; font-size:13px;">${i+1}. ${q.q.substring(0,35)}...</span>
           <div style="display:flex; gap:8px;">
             <button class="btn" style="padding:4px 10px; font-size:10px;" onclick="showEditQuestionModal(${i})">تعديل</button>
-            <button class="btn" style="padding:4px 10px; font-size:10px;" onclick="deleteQuestion(${i})">حذف</button>
+            <button class="btn btn-danger" style="padding:4px 10px; font-size:10px;" onclick="deleteQuestion(${i})">حذف</button>
           </div>
         `;
         cont.appendChild(div);
       });
+    }
+
+    function showAddQuestionModal() {
+      modal.show('إضافة أسئلة جديدة', `
+        <label style="font-size:12px; font-weight:bold;">طريقة الإضافة:</label>
+        <select id="addMode" class="modal-input" onchange="toggleAddMode(this.value)">
+            <option value="single">سؤال واحد</option>
+            <option value="bulk">إضافة جماعية (قائمة)</option>
+        </select>
+        <div id="singleMode">
+            <input id="qIn" class="modal-input" placeholder="اكتب السؤال هنا">
+            <input id="aIn" class="modal-input" placeholder="الإجابة الصحيحة">
+        </div>
+        <div id="bulkMode" style="display:none;">
+            <p style="font-size:11px; color:#666;">اكتب: السؤال | الإجابة (كل سؤال في سطر)</p>
+            <textarea id="bulkIn" class="modal-input" placeholder="السؤال الأول | الإجابة&#10;السؤال الثاني | الإجابة"></textarea>
+        </div>
+      `, [
+        { text: 'إلغاء', class: 'btn', fn: () => modal.hide() },
+        { text: 'حفظ الأسئلة', class: 'btn-primary', fn: () => {
+          const mode = document.getElementById('addMode').value;
+          if(mode === 'single') {
+            const q = document.getElementById('qIn').value;
+            const a = document.getElementById('aIn').value;
+            if(validate(q, "يرجى كتابة السؤال")) { state.questions.push({q, a}); } else return;
+          } else {
+            const lines = document.getElementById('bulkIn').value.split('\n');
+            lines.forEach(l => {
+              if(l.includes('|')) {
+                const [question, answer] = l.split('|').map(s => s.trim());
+                if(question) state.questions.push({q: question, a: answer});
+              }
+            });
+          }
+          save(); refreshQA(); modal.hide();
+        }}
+      ]);
+    }
+
+    function toggleAddMode(mode) {
+      document.getElementById('singleMode').style.display = mode === 'single' ? 'block' : 'none';
+      document.getElementById('bulkMode').style.display = mode === 'bulk' ? 'block' : 'none';
+    }
+
+    function showEditQuestionModal(i) {
+      const q = state.questions[i];
+      modal.show('تعديل السؤال', `
+        <input id="qEd" class="modal-input" value="${q.q}">
+        <input id="aEd" class="modal-input" value="${q.a}">
+      `, [
+        { text: 'إلغاء', class: 'btn', fn: () => modal.hide() },
+        { text: 'تحديث', class: 'btn-primary', fn: () => {
+          state.questions[i] = { q: document.getElementById('qEd').value, a: document.getElementById('aEd').value };
+          save(); refreshQA(); modal.hide();
+        }}
+      ]);
+    }
+
+    function deleteQuestion(i) { if(confirm("حذف هذا السؤال؟")) { state.questions.splice(i,1); save(); refreshQA(); } }
+
+    function refreshNames() {
+      const wCont = document.getElementById('winnersList');
+      const lCont = document.getElementById('losersList');
+      wCont.innerHTML = ''; lCont.innerHTML = '';
+      state.winners.forEach((n, i) => wCont.innerHTML += `<div class="item-row" style="padding:8px 12px;"><span style="font-size:12px; font-weight:700;">🏆 ${n}</span><button class="btn" style="border:none; color:red;" onclick="delName('winner',${i})">×</button></div>`);
+      state.losers.forEach((n, i) => lCont.innerHTML += `<div class="item-row" style="padding:8px 12px;"><span style="font-size:12px; font-weight:700;">🕯️ ${n}</span><button class="btn" style="border:none; color:red;" onclick="delName('loser',${i})">×</button></div>`);
+    }
+
+    function delName(type, i) { if(type==='winner') state.winners.splice(i,1); else state.losers.splice(i,1); save(); refreshNames(); }
+
+    function showAddNameModal(type) {
+      modal.show(`إضافة ${type==='winner'?'فائزين':'مغادرين'}`, `
+        <textarea id="nIn" class="modal-input" placeholder="اكتب الأسماء هنا (كل اسم في سطر)"></textarea>
+      `, [
+        { text: 'إلغاء', class: 'btn', fn: () => modal.hide() },
+        { text: 'إضافة', class: 'btn-primary', fn: () => {
+          const names = document.getElementById('nIn').value.split('\n').map(n => n.trim()).filter(n => n !== '');
+          if(names.length > 0) { 
+            if(type==='winner') state.winners.push(...names); else state.losers.push(...names); 
+            save(); refreshNames(); modal.hide();
+          } else alert("يرجى إدخال أسماء");
+        }}
+      ]);
+    }
+
+    function exportData() {
+      const blob = new Blob([JSON.stringify(state)], {type: "application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `backup_competition_${Date.now()}.json`;
+      a.click();
+    }
+
+    function importData() {
+      const input = document.createElement('input');
+      input.type = 'file'; input.accept = '.json';
+      input.onchange = e => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          state = JSON.parse(reader.result);
+          save(); location.reload();
+        };
+        reader.readAsText(e.target.files[0]);
+      };
+      input.click();
+    }
+
+    function showSettingsModal() {
+      modal.show('الإعدادات المتقدمة', `
+        <label style="font-size:12px; font-weight:bold;">اسم المناسبة</label>
+        <input id="subIn" class="modal-input" value="${state.subTitle}">
+        <label style="font-size:12px; font-weight:bold;">اسم العلامة التجارية</label>
+        <input id="brandIn" class="modal-input" value="${state.brandTitle}">
+        <hr style="opacity:0.1; margin: 15px 0;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <button class="btn" onclick="exportData()">📤 تصدير نسخة</button>
+            <button class="btn" onclick="importData()">📥 استيراد نسخة</button>
+        </div>
+      `, [
+        { text: 'إغلاق', class: 'btn', fn: () => modal.hide() },
+        { text: 'حفظ التعديلات', class: 'btn-primary', fn: () => { 
+          state.subTitle = document.getElementById('subIn').value;
+          state.brandTitle = document.getElementById('brandIn').value;
+          save(); modal.hide(); 
+        }}
+      ]);
+    }
+
+    function showEditRoundModal() {
+      modal.show('تعديل اسم الجولة', `<input id="rIn" class="modal-input" value="${state.roundName}">`, [
+        { text: 'إلغاء', class: 'btn', fn: () => modal.hide() },
+        { text: 'تحديث', class: 'btn-primary', fn: () => { state.roundName = document.getElementById('rIn').value; save(); modal.hide(); }}
+      ]);
     }
 
     function renderQuestionsPreview(withAnswer) {
@@ -278,8 +452,8 @@
         const div = document.createElement('div');
         div.className = 'card';
         div.innerHTML = `
-          <div style="font-size:10px; color:var(--gold); font-weight:700; margin-bottom:5px;">O2 FOOTBALL</div>
-          <h2>سؤال رقم ${i+1}</h2>
+          <div class="ribbon">سؤال ${i+1}</div>
+          <div style="font-size:11px; color:var(--gold); font-weight:800; margin-bottom:5px;">${state.brandTitle}</div>
           <div class="round-label">${state.roundName}</div>
           <div class="content">${q.q}</div>
           ${withAnswer ? `<div class="ans-box">الإجابة: ${q.a}</div>` : ''}
@@ -291,23 +465,24 @@
     }
 
     function renderUnifiedCard() {
+      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
       const container = document.getElementById('cardsContainer');
       const div = document.createElement('div');
       div.className = 'card';
       div.innerHTML = `
-        <div style="font-size:10px; color:var(--gold); font-weight:700; margin-bottom:5px;">O2 FOOTBALL</div>
-        <h2>نتائج المسابقة</h2>
+        <div style="font-size:12px; color:var(--gold); font-weight:900;">${state.brandTitle}</div>
+        <h2 style="font-size:32px;">نتائج المسابقة</h2>
         <div class="round-label">${state.roundName}</div>
         <div class="unified-grid">
-          <div class="res-box" style="background:#f4faf7;">
-            <h3 style="color:var(--emerald); font-size:14px; margin-bottom:5px;">🏆 المتأهلون</h3>
-            <div style="font-size:10px; color:#555; margin-bottom:15px; font-weight:600;">ألف مبروك التأهل! بانتظاركم في التحديات القادمة 🌟</div>
-            ${state.winners.map(n => `<div style="font-weight:700; font-size:13px; margin-bottom:5px;">⭐ ${n}</div>`).join('') || '<div style="font-size:12px; color:#999;">لا يوجد أسماء بعد</div>'}
+          <div class="res-box" style="border-top: 4px solid var(--emerald);">
+            <h3 style="color:var(--emerald); font-size:16px;">🏆 المتأهلون</h3>
+            ${state.winners.map(n => `<div style="font-weight:800; font-size:14px; color:var(--primary-dark);">⭐ ${n}</div>`).join('') || '---'}
+            <div class="msg-tag" style="color:var(--emerald);">ألف مبروك التأهل! بانتظاركم في التحديات القادمة 🌟</div>
           </div>
-          <div class="res-box" style="background:#fffcfc;">
-            <h3 style="color:#b91c1c; font-size:14px; margin-bottom:5px;">🕯️ المغادرون</h3>
-            <div style="font-size:10px; color:#555; margin-bottom:15px; font-weight:600;">شكراً لمشاركتكم وتفاعلكم، حظ أوفر في المرات القادمة 🌹</div>
-            ${state.losers.map(n => `<div style="font-weight:700; font-size:13px; margin-bottom:5px;">${n}</div>`).join('') || '<div style="font-size:12px; color:#999;">لا يوجد أسماء بعد</div>'}
+          <div class="res-box" style="border-top: 4px solid #b91c1c;">
+            <h3 style="color:#b91c1c; font-size:16px;">🕯️ المغادرون</h3>
+            ${state.losers.map(n => `<div style="font-weight:700; font-size:13px; color:#b91c1c;">${n}</div>`).join('') || '---'}
+            <div class="msg-tag" style="color:#b91c1c;">شكراً لمشاركتكم وتفاعلكم، حظ أوفر في المرات القادمة 🌹</div>
           </div>
         </div>
         <button class="btn btn-primary" style="margin-top:30px; width:100%" onclick="downloadCard(this.parentElement)">📥 حفظ بطاقة النتائج</button>
@@ -328,58 +503,9 @@
       });
     }
 
-    function showAddQuestionModal() {
-      modal.show('إضافة سؤال', `<input id="qIn" class="modal-input" placeholder="السؤال"><input id="aIn" class="modal-input" placeholder="الإجابة">`, [
-        { text: 'حفظ', class: 'btn-primary', fn: () => {
-          const q = document.getElementById('qIn').value;
-          const a = document.getElementById('aIn').value;
-          if(q) { state.questions.push({q,a}); save(); refreshQA(); }
-        }}
-      ]);
-    }
-
-    function showEditQuestionModal(i) {
-      const q = state.questions[i];
-      modal.show('تعديل السؤال', `<input id="qEd" class="modal-input" value="${q.q}"><input id="aEd" class="modal-input" value="${q.a}">`, [
-        { text: 'تحديث', class: 'btn-primary', fn: () => {
-          state.questions[i] = { q: document.getElementById('qEd').value, a: document.getElementById('aEd').value };
-          save(); refreshQA();
-        }}
-      ]);
-    }
-
-    function deleteQuestion(i) { state.questions.splice(i,1); save(); refreshQA(); }
-
-    function refreshNames() {
-      const wCont = document.getElementById('winnersList');
-      const lCont = document.getElementById('losersList');
-      wCont.innerHTML = ''; lCont.innerHTML = '';
-      state.winners.forEach((n, i) => wCont.innerHTML += `<div class="item-row" style="padding:8px 12px;"><span style="font-size:11px;">🏆 ${n}</span><button class="btn" style="border:none; padding:0" onclick="delName('winner',${i})">×</button></div>`);
-      state.losers.forEach((n, i) => lCont.innerHTML += `<div class="item-row" style="padding:8px 12px;"><span style="font-size:11px;">🕯️ ${n}</span><button class="btn" style="border:none; padding:0" onclick="delName('loser',${i})">×</button></div>`);
-    }
-
-    function delName(type, i) { if(type==='winner') state.winners.splice(i,1); else state.losers.splice(i,1); save(); refreshNames(); }
-
-    function showAddNameModal(type) {
-      modal.show('إضافة مشارك', `<input id="nIn" class="modal-input" placeholder="الاسم">`, [
-        { text: 'إضافة', class: 'btn-primary', fn: () => {
-          const n = document.getElementById('nIn').value;
-          if(n) { if(type==='winner') state.winners.push(n); else state.losers.push(n); save(); refreshNames(); }
-        }}
-      ]);
-    }
-
-    function showEditRoundModal() {
-      modal.show('تعديل اسم الجولة', `<input id="rIn" class="modal-input" value="${state.roundName}">`, [
-        { text: 'تحديث', class: 'btn-primary', fn: () => { state.roundName = document.getElementById('rIn').value; save(); }}
-      ]);
-    }
-
     function clearPreview() { document.getElementById('cardsContainer').innerHTML = ''; }
 
-    save();
-    refreshQA();
-    refreshNames();
+    updateTitles(); refreshQA(); refreshNames();
   </script>
 </body>
 </html>
